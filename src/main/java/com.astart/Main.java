@@ -72,6 +72,37 @@ public class Main {
         }
     }
 
+    public Set<Point> getObstaclePoints() {
+        return obstaclePoints;
+    }
+
+    public void setObstaclePoints(Set<Point> obstaclePoints) {
+        this.obstaclePoints = obstaclePoints;
+    }
+
+    public ArrayList<Point> getCityPoints() {
+        return cityPoints;
+    }
+
+    public void setCityPoints(ArrayList<Point> cityPoints) {
+        this.cityPoints = cityPoints;
+    }
+
+    public Set<Point> getTreasuresPoints() {
+        return treasuresPoints;
+    }
+
+    public void setTreasuresPoints(Set<Point> treasuresPoints) {
+        this.treasuresPoints = treasuresPoints;
+    }
+
+    public LinkedList<Point> getPlayerPoints() {
+        return playerPoints;
+    }
+
+    public void setPlayerPoints(LinkedList<Point> playerPoints) {
+        this.playerPoints = playerPoints;
+    }
 
     public static void main(String[] args) {
         String corrdinate = "";
@@ -87,6 +118,16 @@ public class Main {
         Main main = new Main();
         main.getMassage(str1);
         main.getMassage(str2);
+        AStar aStar = new AStar();
+        aStar.setTreasuresPoints(main.getTreasuresPoints());
+        aStar.setObstaclePoints(main.getObstaclePoints());
+        Point startP = new Point(191,277,0);
+        Point endP = new Point(138,244,4);
+        Point p  = aStar.start(startP,endP);
+        while (p.getPoint() != null){
+            System.out.println(p.getKey());
+            p = p.getPoint();
+        }
 
 
     }

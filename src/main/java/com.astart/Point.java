@@ -1,6 +1,6 @@
 package com.astart;
 
-public class Point {
+public class Point implements Comparable<Point>{
     private int x;
     private int y;
     private int pointType;  //0-空点 1-障碍 2-历练点 3-长安 4-江城 5-庐城 6-蜀城 7-吴城 9-玩家
@@ -93,6 +93,7 @@ public class Point {
 
     public void setG(int g) {
         this.g = g;
+        this.setF(this.g + this.h);
     }
 
     public int getH() {
@@ -101,6 +102,7 @@ public class Point {
 
     public void setH(int h) {
         this.h = h;
+        this.setF(this.g + this.h);
     }
 
     public Point getPoint() {
@@ -120,14 +122,14 @@ public class Point {
                 ", pointName='" + pointName + '\'' +
                 '}';
     }
-//        @Override
-//        public int hashCode() {
-//            final int prime = 31;
-//            int result = 1;
-//            result = prime * result + x;
-//            result = prime * result + y;
-//            return result;
-//        }
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + x;
+            result = prime * result + y;
+            return result;
+        }
 
         @Override
         public boolean equals(Object obj) {
@@ -144,4 +146,20 @@ public class Point {
                 return false;
             return true;
         }
+
+    @Override
+    public int compareTo(Point o) { {
+            if (o == null) return -1;
+            if (this.getF() == o.getF()){
+                if (this.getH() > o.getH())
+                    return 1;
+                else if (this.getH() < o.getH()) return -1;
+                return 0;
+            }
+            else if (this.getF() < o.getF()) return -1;
+            else if(this.getF() > o.getF()){
+                return 1;
+            } else return 0;
+        }
     }
+}
